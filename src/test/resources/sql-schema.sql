@@ -13,3 +13,10 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
     `price` VARCHAR(40) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
+
+CREATE TABLE IF NOT EXISTS `ims`.`orders` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+    `fk_cid` INT(11),
+    FOREIGN KEY (fk_cid) REFERENCES customers(id)
+    PRIMARY KEY (`id`),
+);
