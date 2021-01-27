@@ -4,10 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.OrderController;
 import com.qa.ims.controller.ICrudController;
 import com.qa.ims.controller.ItemController;
 import com.qa.ims.persistence.dao.CustomerDao;
 import com.qa.ims.persistence.dao.ItemDao;
+import com.qa.ims.persistence.dao.OrderDao;
 import com.qa.ims.utils.DatabaseUtilities;
 import com.qa.ims.utils.JavaUtilities;
 
@@ -17,7 +19,10 @@ public class IMSEntryPoint {
 
     private final CustomerController customers;
     private final ItemController items;
+    private final OrderController orders;
     private final JavaUtilities javaUtilities;
+
+
 
     public IMSEntryPoint() {
         this.javaUtilities = new JavaUtilities();
@@ -25,6 +30,8 @@ public class IMSEntryPoint {
         this.customers = new CustomerController(custDAO, javaUtilities);
         final ItemDao iteDAO = new ItemDao();
         this.items = new ItemController(iteDAO, javaUtilities);
+        final OrderDao ordDAO = new OrderDao();
+        this.orders = new OrderController(ordDAO, javaUtilities);
         
     }
 
@@ -56,7 +63,7 @@ public class IMSEntryPoint {
                 active = this.items;
                 break;
             case ORDER:
-                // fill this in!
+                active = this.orders;
                 break;
             case STOP:
                 return;

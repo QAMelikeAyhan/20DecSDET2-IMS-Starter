@@ -22,7 +22,7 @@ public class ItemDao implements IDomainDao<Item> {
     public Item create(Item item) {
         try (Connection connection = DatabaseUtilities.getInstance().getConnection();
                 PreparedStatement statement = connection
-                        .prepareStatement("INSERT INTO items(itemName, price) VALUES (?, ?)");) {
+                        .prepareStatement("INSERT INTO items(item_Name, price) VALUES (?, ?)");) {
             statement.setString(1, item.getItemName());
             statement.setDouble(2, item.getPrice());
             statement.executeUpdate();
@@ -110,7 +110,7 @@ public class ItemDao implements IDomainDao<Item> {
     @Override
     public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
-        String itemName = resultSet.getString("itemName");
+        String itemName = resultSet.getString("item_Name");
         Double Price = resultSet.getDouble("Price");
         return new Item(id, itemName, Price);
     }

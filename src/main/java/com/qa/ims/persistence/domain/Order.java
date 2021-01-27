@@ -1,45 +1,70 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 
 	private Long id;
-	private Long fk_cid;
+	private List<Item> orderItems = new ArrayList<>();
+	private Customer orderCustomer;
+	private Double orderPrice;
 	
-	public Order(Long id, Long fk_cid) {
-		this.setId(id);
-		this.setId(fk_cid);
+	
+	public Order(Long id, List<Item> orderItems, Customer orderCustomer, Double orderPrice) {
+		super();
+		this.id = id;
+		this.orderItems = orderItems;
+		this.orderCustomer = orderCustomer;
+		this.orderPrice = orderPrice;
 	}
-
+	public Order(List<Item> orderItems, Customer orderCustomer, Double orderPrice) {
+		super();
+		this.orderItems = orderItems;
+		this.orderCustomer = orderCustomer;
+		this.orderPrice = orderPrice;
+	}
+	
+	public Order(Customer orderCustomer, Double orderPrice) {
+		super();
+		this.orderCustomer = orderCustomer;
+		this.orderPrice = orderPrice;
+	}
+		
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Long getFk_cid() {
-		return fk_cid;
+	public List<Item> getOrderItems() {
+		return orderItems;
 	}
-
-	public void setFk_cid(Long fk_cid) {
-		this.fk_cid = fk_cid;
+	public void setOrderItems(List<Item> orderItems) {
+		this.orderItems = orderItems;
 	}
-
-	@Override
-	public String toString() {
-		return "id: " + id + ", fk_cid=" + fk_cid;
+	public Customer getOrderCustomer() {
+		return orderCustomer;
 	}
-
+	public void setOrderCustomer(Customer orderCustomer) {
+		this.orderCustomer = orderCustomer;
+	}
+	public Double getOrderPrice() {
+		return orderPrice;
+	}
+	public void setOrderPrice(Double orderPrice) {
+		this.orderPrice = orderPrice;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		double result = 1;
+		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((fk_cid == null) ? 0 : fk_cid.hashCode());
-		return (int) result;
+		result = prime * result + ((orderCustomer == null) ? 0 : orderCustomer.hashCode());
+		result = prime * result + ((orderItems == null) ? 0 : orderItems.hashCode());
+		result = prime * result + ((orderPrice == null) ? 0 : orderPrice.hashCode());
+		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,6 +79,28 @@ public class Order {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (orderCustomer == null) {
+			if (other.orderCustomer != null)
+				return false;
+		} else if (!orderCustomer.equals(other.orderCustomer))
+			return false;
+		if (orderItems == null) {
+			if (other.orderItems != null)
+				return false;
+		} else if (!orderItems.equals(other.orderItems))
+			return false;
+		if (orderPrice == null) {
+			if (other.orderPrice != null)
+				return false;
+		} else if (!orderPrice.equals(other.orderPrice))
+			return false;
 		return true;
-		}
+	}
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderItems=" + orderItems + ", orderCustomer=" + orderCustomer + ", orderPrice="
+				+ orderPrice + "]";
+	}
+	
+
 }
